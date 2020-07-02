@@ -1,0 +1,26 @@
+version: "3"
+services:
+  web:
+    build: .
+    command: yarn start:dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+    env_file:
+      ".env.development"
+    networks:
+      - boilerplate-network
+
+  database:
+    image: postgres:12
+    ports:
+      - "5432:5432"
+    env_file:
+      ".env.development"
+    networks:
+      - boilerplate-network
+
+networks:
+  boilerplate-network:
+    driver: bridge
